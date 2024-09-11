@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./index.css" />
+    <title>Namaste React</title>
+</head>
+<body>
+    <h1>Hello top of root</h1>
+    <div id="root">
+        <h1>Madhuri is here</h1> <!--This is replaced by root.render with new tags-->
+        <!---<h1>Hello World!</h1> This is the line for displaying the text using plain HTML--->
+
+    </div>
+    <h1>Hello below of root</h1>
+    <!---adding H1 tag inside JS
+    <script>
+        const heading = document.createElement("h1");
+        heading.innerHTML = "Hello World from Javascript!";
+
+        const root = document.getElementById("root");
+        root.appendChild(heading);
+    </script>-->
+
+    <!--First step to add react into our project using CDNs-->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+
+    <!--<script>
+
+        const heading = React.createElement("h1", {}, "Hello World from React!");
+
+        const root = ReactDOM.createRoot(document.getElementById("root"));
+        root.render(heading);
+
+    </script>-->
+
+    <script src="./App.js"></script>
+
+</body>
+</html>
