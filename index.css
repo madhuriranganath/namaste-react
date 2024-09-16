@@ -1,3 +1,61 @@
-#heading {
+/* #heading {
     color: red;
+} */
+
+.header {
+    display: flex;
+    border: 1px solid black;
+}
+
+.logo-container {
+    width: 50%;
+}
+
+.nav-items {
+    width: 50%;
+}
+
+.logo {
+    width: 150px;
+}
+
+.nav-items > ul {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    font-size: 25px;
+    float: right;
+}
+
+.nav-items > ul > li {
+    padding: 20px 25px;
+}
+
+.body {
+    width: 100%;
+}
+
+.res-container {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.res-card {
+    width: 14%;
+    padding: 5px;
+    margin: 10px;
+}
+
+.res-card:hover{
+    cursor: pointer;
+    border: 1px solid black;
+}
+
+.res-logo {
+    width: 100%;
+}
+
+.search {
+    margin: 10px;
 }
