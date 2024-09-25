@@ -102,3 +102,8 @@
 .search-container {
     margin: 10px 10px 0px 0px;
 }
+
+.user-functional, .user-class {
+    padding: 10px;
+    border: 1px solid black;
+}
