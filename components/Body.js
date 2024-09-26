@@ -2,9 +2,12 @@ import RestaurantCard from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
+import useOnlineStatus from "../utils/useOnlineStatus";
 // import {resObj} from "../utils/mockData";
 
 const Body = () => {
+
+    
 
     // const [listOfRestaurant, setListOfRestaurant] = useState(resObj);
     const [listOfRestaurant, setListOfRestaurant] = useState([]);
@@ -36,6 +39,12 @@ const Body = () => {
     // if(listOfRestaurant.length === 0){
     //     return <Shimmer />;
     // }
+
+    const onlineStatus = useOnlineStatus();
+
+    if (onlineStatus===false) {
+        return <h1>Looks like you're offile. Please check your internet connection.</h1>
+    }
     
     // Ternary operator for conditional rendering
     return listOfRestaurant.length === 0 ? <Shimmer />: (

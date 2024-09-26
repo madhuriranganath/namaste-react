@@ -1,4 +1,4 @@
-import React from "react";
+import React, { lazy, Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -93,6 +93,14 @@ import RestaurantMenu from "./components/RestaurantMenu";
 
 //root.render(heading); // render will be respensible to convert object to heading tag and put it up on DOM
 
+// Chunking
+// Dynamic bundling
+// Lazy loading
+// Demand loading
+// Dynamic import
+
+const Grocery = lazy(() => import("./components/Grocery"));
+
 const Applayout = () => {
     return (
         <div className="app">
@@ -118,6 +126,10 @@ const appRouter = createBrowserRouter([
             {
                 path: "/contact",
                 element: <Contact />
+            },
+            {
+                path: "/grocery",
+                element: <Suspense fallback={<h1>Loding....</h1>}><Grocery /></Suspense>
             },
             {
                 path: "/restaurant/:resId",
