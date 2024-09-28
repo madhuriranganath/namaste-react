@@ -1,6 +1,10 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* #heading {
     color: red;
-} */
+} 
 
 .header {
     display: flex;
@@ -106,4 +110,4 @@
 .user-functional, .user-class {
     padding: 10px;
     border: 1px solid black;
-}
+}*/

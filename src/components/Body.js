@@ -37,7 +37,7 @@ const Body = () => {
 
     // Conditional rendering - rendering based on the codition
     // if(listOfRestaurant.length === 0){
-    //     return <Shimmer />;
+        // return <Shimmer />;
     // }
 
     const onlineStatus = useOnlineStatus();
@@ -45,19 +45,23 @@ const Body = () => {
     if (onlineStatus===false) {
         return <h1>Looks like you're offile. Please check your internet connection.</h1>
     }
+
+    console.log(listOfRestaurant);
+
+    // return <Shimmer />;
     
     // Ternary operator for conditional rendering
     return listOfRestaurant.length === 0 ? <Shimmer />: (
         <div className="body">
-            <div className="filter">
-                <div className="search-container">
-                    <input className="search-input" onChange={
+            <div className="filter flex">
+                <div className="search-container m-4">
+                    <input className="search-input border border-solid border-black mr-4" onChange={
                         (e) => {
                             setsearchText(e.target.value);
 
                         }
                     } value={searchText}/>
-                    <button className="search-btn" onClick={
+                    <button className="search-btn px-3 py-1 bg-green-200 rounded-md" onClick={
                         () => {
                             // Filter the restaurant cards and update the UI
                             // searchText
@@ -71,29 +75,31 @@ const Body = () => {
                         }
                     }>Search</button>
                 </div>
-           
-                <button className="filter-btn" onClick={() => 
-                    {
-                        const restaurantsData = listOfRestaurant.filter(
-                            (res) => res.info.avgRating > 4
-                        );
-                        //console.log(listOfRestaurant)
-                        setListOfRestaurant(restaurantsData);
+                <div className="flex items-center">
+                    <button className="filter-btn mr-4 px-3 py-1 bg-red-200 rounded-md" onClick={() => 
+                        {
+                            const restaurantsData = listOfRestaurant.filter(
+                                (res) => res.info.avgRating > 4
+                            );
+                            //console.log(listOfRestaurant)
+                            setfilteredRestaurant(restaurantsData);
+                        }
+                    }>Top Rated Restaurant</button>
+                    <button className="lessTimeDeliveryRes-btn mr-4 px-3 py-1 bg-red-200 rounded-md"
+                    onClick={
+                        () => {
+                            const lessTimeDeliveryRestaurant = listOfRestaurant.filter(
+                                (res) => res.info.sla.deliveryTime < 25
+                            )
+                            setfilteredRestaurant(lessTimeDeliveryRestaurant)
+                        }
+                        
                     }
-                }>Top Rated Restaurant</button>
-                <button className="lessTimeDeliveryRes-btn"
-                onClick={
-                    () => {
-                        const lessTimeDeliveryRestaurant = listOfRestaurant.filter(
-                            (res) => res.info.sla.deliveryTime < 20
-                        )
-                        setListOfRestaurant(lessTimeDeliveryRestaurant)
-                    }
-                    
-                }
-                >Less Time Delivery Restaurant</button>
+                    >Less Time Delivery Restaurant</button>
+                </div>
+                
              </div>
-            <div className="res-container">
+            <div className="res-container flex flex-wrap">
                 {
                     filteredRestaurant.map((restaurant) => (
                         <Link key={restaurant.info.id} to={"/restaurant/"+restaurant.info.id} className="resLink"><RestaurantCard  resData={restaurant} /></Link>
