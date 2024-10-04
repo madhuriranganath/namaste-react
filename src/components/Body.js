@@ -1,8 +1,9 @@
-import RestaurantCard from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import RestaurantCard, {withPureVegRestaurants} from "./RestaurantCard";
+import { useContext, useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+import UserContext from "../utils/UserContext";
 // import {resObj} from "../utils/mockData";
 
 const Body = () => {
@@ -15,6 +16,8 @@ const Body = () => {
     const [filteredRestaurant, setfilteredRestaurant] = useState([]);
 
     const [searchText, setsearchText] = useState("");
+
+    const PureVegRestaurants = withPureVegRestaurants(RestaurantCard);
 
     // Whenever the state variable update, react triggers a reconcilation cycle (re-renders the component)
     console.log("body rendered");
@@ -46,7 +49,12 @@ const Body = () => {
         return <h1>Looks like you're offile. Please check your internet connection.</h1>
     }
 
-    console.log(listOfRestaurant);
+    const {userName, setuserName} = useContext(UserContext);
+
+
+    // console.log(setuserName);
+
+    // console.log(listOfRestaurant);
 
     // return <Shimmer />;
     
@@ -96,13 +104,28 @@ const Body = () => {
                         
                     }
                     >Less Time Delivery Restaurant</button>
+                    <div>
+                    <input className="border border-black p-1" value={userName} onChange={
+                        (e) => {
+                            setuserName(e.target.value);
+                        }
+                    }/>
+                    </div>
                 </div>
                 
              </div>
             <div className="res-container flex flex-wrap">
                 {
                     filteredRestaurant.map((restaurant) => (
-                        <Link key={restaurant.info.id} to={"/restaurant/"+restaurant.info.id} className="resLink"><RestaurantCard  resData={restaurant} /></Link>
+                       
+                        <Link key={restaurant.info.id} to={"/restaurant/"+restaurant.info.id} className="resLink">
+                            {
+                                
+                                 (restaurant.info.badges.imageBadges && restaurant.info.badges.imageBadges[0].description === "pureveg") ? <PureVegRestaurants resData={restaurant} /> : <RestaurantCard  resData={restaurant} />
+                               
+                           
+                            }
+                        </Link>
                     ))
                 }
             </div>

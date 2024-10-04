@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import Header from "./components/Header";
 import Body from "./components/Body";
@@ -7,6 +7,7 @@ import { createBrowserRouter, Outlet, RouterProvider } from "react-router-dom";
 import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
+import UserContext from "./utils/UserContext";
 
 //Example to show we can use both default export and named export in the same file
 // import { TEST } from "./components/Header";
@@ -101,12 +102,28 @@ import RestaurantMenu from "./components/RestaurantMenu";
 
 const Grocery = lazy(() => import("./components/Grocery"));
 
+
+
 const Applayout = () => {
+    const [userName, setuserName] = useState();
+
+    useEffect(
+        () => {
+            const data = {
+                name: "Madhuri Ranganath"
+            }
+            setuserName(data.name);
+        }, []
+    )
+
+    
     return (
-        <div className="app">
-            <Header />
-            <Outlet />
-        </div>
+        <UserContext.Provider value={{userName: userName, setuserName}}>
+            <div className="app">
+                <Header />
+                <Outlet />
+            </div>
+        </UserContext.Provider>
     );
 };
 
