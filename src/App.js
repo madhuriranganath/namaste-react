@@ -8,6 +8,9 @@ import Contact from "./components/Contact";
 import Error from "./components/Error";
 import RestaurantMenu from "./components/RestaurantMenu";
 import UserContext from "./utils/UserContext";
+import { Provider } from "react-redux";
+import Cart from "./components/Cart";
+import appStore from "./utils/appStore";
 
 //Example to show we can use both default export and named export in the same file
 // import { TEST } from "./components/Header";
@@ -118,12 +121,15 @@ const Applayout = () => {
 
     
     return (
-        <UserContext.Provider value={{userName: userName, setuserName}}>
-            <div className="app">
-                <Header />
-                <Outlet />
-            </div>
-        </UserContext.Provider>
+        <Provider store={appStore}>
+            <UserContext.Provider value={{userName: userName, setuserName}}>
+                <div className="app">
+                    <Header />
+                    <Outlet />
+                </div>
+            </UserContext.Provider>
+        </Provider>
+        
     );
 };
 
@@ -151,6 +157,10 @@ const appRouter = createBrowserRouter([
             {
                 path: "/restaurant/:resId",
                 element: <RestaurantMenu />
+            },
+            {
+                path: "/cart",
+                element: <Cart />
             },
         ],
         errorElement: <Error />

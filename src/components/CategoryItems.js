@@ -1,7 +1,16 @@
+import { useDispatch } from "react-redux";
 import { IMAGE_LOGO } from "../utils/constants";
+import { addItems } from "../utils/cartSlice";
 
 const CategoryItems = ({items}) => {
     // console.log(items)
+
+    const dispatch = useDispatch();
+    const handleItemAdd = (itemDetails) => {
+        console.log(itemDetails)
+        dispatch(addItems(itemDetails));
+    };
+
     return (
         <div>
             {items.map(
@@ -13,10 +22,9 @@ const CategoryItems = ({items}) => {
                                 <p className="text-slate-500 text-xs">{itemDetails?.card?.info?.description}</p>
                             </div>
                             <div className="w-[150px] h-auto">
-                                {(itemDetails?.card?.info?.imageId)?<div className="absolute "><button className="bg-white rounded-lg shadow-md px-1">Add +</button></div>:""}
+                                {(itemDetails?.card?.info?.imageId)?<div className="absolute "><button className="bg-white rounded-lg shadow-md px-1" onClick={() => handleItemAdd(itemDetails)}>Add +</button></div>:""}
                                 {(itemDetails?.card?.info?.imageId)?<img className="" src={IMAGE_LOGO + itemDetails?.card?.info?.imageId} />:""}
                                 
-
                             </div>
                         </div>
                     </div>

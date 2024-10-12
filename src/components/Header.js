@@ -3,6 +3,7 @@ import { APP_LOGO } from "../utils/constants";
 import { useContext, useState } from "react";
 import useOnlineStatus from "../utils/useOnlineStatus";
 import UserContext from "../utils/UserContext";
+import { useSelector } from "react-redux";
 
 const Header = () => {
 
@@ -12,7 +13,10 @@ const Header = () => {
 
     const {userName, setuserName} = useContext(UserContext);
 
-    console.log(userName);
+    // console.log(userName);
+
+    const store = useSelector((store) => store.cart.items);
+    console.log(store);
 
     return (
         <div className="header flex justify-between border border-solid border-black m-1 shadow-md bg-pink-50">
@@ -25,7 +29,7 @@ const Header = () => {
                     <li className="pr-4"><Link to="/">Home</Link></li>
                     <li className="pr-4"><Link to="/about">About Us</Link></li>
                     <li className="pr-4"><Link to="/contact">Contact Us</Link></li>
-                    <li className="pr-4">Cart</li>
+                    <li className="pr-4 font-bold"><Link to="/cart">Cart - ({store.length} items)</Link></li>
                     <li className="pr-4"><Link to="/grocery">Grocery</Link></li>
                     <li className="pr-4"><button className="log-btn px-3 py-1 bg-green-200 rounded-md" onClick={
                         () => {
